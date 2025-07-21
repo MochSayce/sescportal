@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transaction Records – View Only</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Container & Layout */
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 0.2rem;
+      font-size: 2rem;
+    }
+    .info-note {
+      text-align: center;
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 1.5rem;
+    }
+    /* Controls */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .controls input,
+    .controls select {
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 0.9em;
+      flex: 1 1 150px;
+    }
+    .controls button {
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #1A1A40;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background 0.2s;
+    }
+    .controls button:hover {
+      background: #5B5AA4;
+    }
+    .lock-note {
+      text-align: center;
+      color: #e33333;
+      font-size: 0.9em;
+      margin-bottom: 0.5rem;
+      min-height: 1em;
+    }
+    /* Transaction Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    th {
+      background: #5B5AA4;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    .censored {
+      color: #999;
+      background: #eee;
+      font-style: italic;
+      user-select: none;
+      pointer-events: none;
+    }
+    .total-summary {
+      margin-top: 1.5rem;
+      text-align: right;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #222;
+    }
+    canvas {
+      max-width: 100%;
+      display: block;
+      margin: 2rem auto;
+    }
+    @media(max-width: 650px) {
+      .controls { flex-direction: column; }
+      .controls input, .controls select, .controls button {
+        width: 100%;
+      }
+    }
+    @media print {
+      body * { visibility: hidden; }
+      .container, .container * { visibility: visible; }
+      .container { position: absolute; top: 0; left: 0; width: 100%; padding: 0; box-shadow: none; }
+      .controls, .lock-note { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Transaction Records – View Only</h1>
+    <p class="info-note">
+      Receipt, Name & Amount are hidden unless unlocked with correct details.<br>
+      Up to 5 attempts allowed—then locked for 1 minute.<br>
+      Admin can view all with correct credentials.
+    </p>
+
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search by name/major…">
+      <select id="filterYear"><option value="">All Years</option></select>
+      <select id="filterMajor"><option value="">All Majors</option></select>
+      <input type="text" id="unlockName" placeholder="Enter exact name">
+      <input type="number" id="unlockReceipt" placeholder="Receipt #">
+      <button id="unlockBtn">Unlock</button>
+      <button id="viewAllBtn">View All (Admin)</button>
+      <button onclick="window.print()">Print</button>
+      <button onclick="location.href='index.html'">Back to Login</button>
+    </div>
+
+    <p class="lock-note" id="lockNote"></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Receipt</th>
+          <th>Name</th>
+          <th>Year</th>
+          <th>Major</th>
+          <th>Amount</th>
+          <th>Encoded By</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <div class="total-summary" id="totalSummary">
+      Total Amount: ₱0.00
+    </div>
+
+    <canvas id="majorChart" height="200"></canvas>
+    <canvas id="yearChart" height="200"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const txs = JSON.parse(localStorage.getItem('transactions') || '[]');
+
+    const tbody         = document.getElementById('tbody');
+    const searchInput   = document.getElementById('search');
+    const filterYear    = document.getElementById('filterYear');
+    const filterMajor   = document.getElementById('filterMajor');
+    const unlockName    = document.getElementById('unlockName');
+    const unlockReceipt = document.getElementById('unlockReceipt');
+    const unlockBtn     = document.getElementById('unlockBtn');
+    const viewAllBtn    = document.getElementById('viewAllBtn');
+    const lockNote      = document.getElementById('lockNote');
+    const totalSummary  = document.getElementById('totalSummary');
+
+    let revealedKey = null;
+    let attempts = 0;
+    let lockedUntil = null;
+    let isAdmin = false;
+    let majorChart = null, yearChart = null;
+
+    (function populateFilters(){
+      const yrs = [...new Set(txs.map(t => t.year))];
+      yrs.forEach(y => filterYear.insertAdjacentHTML('beforeend', `<option value="${y}">${y}</option>`));
+      const mags = [...new Set(txs.map(t => t.major))];
+      mags.forEach(m => filterMajor.insertAdjacentHTML('beforeend', `<option value="${m}">${m}</option>`));
+    })();
+
+    function shuffle(arr) {
+      return arr.map(v => ({v, r: Math.random()}))
+                .sort((a, b) => a.r - b.r)
+                .map(o => o.v);
+    }
+
+    function render() {
+      const searchVal = searchInput.value.toLowerCase();
+      const y = filterYear.value;
+      const m = filterMajor.value;
+
+      const rows = shuffle(txs).filter(t => {
+        const combo = `${t.name} ${t.major} ${t.year}`.toLowerCase();
+        return combo.includes(searchVal)
+          && (!y || t.year === y)
+          && (!m || t.major === m);
+      });
+
+      tbody.innerHTML = '';
+      rows.forEach(t => {
+        const key = `${unlockName.value.trim()}::${unlockReceipt.value.trim()}`;
+        const unlocked = (isAdmin)
+                       || (revealedKey === key
+                          && t.name === unlockName.value.trim()
+                          && Number(unlockReceipt.value) === t.receipt);
+
+        const rTxt = unlocked ? t.receipt : '••••••';
+        const nTxt = unlocked ? t.name : '••••••';
+        const aTxt = unlocked ? `₱${t.amount}` : 'Hidden';
+        const cls = unlocked ? '' : 'censored';
+
+        tbody.insertAdjacentHTML('beforeend', `
+          <tr>
+            <td class="${cls}">${rTxt}</td>
+            <td class="${cls}">${nTxt}</td>
+            <td>${t.year}</td>
+            <td>${t.major}</td>
+            <td class="${cls}">${aTxt}</td>
+            <td>${t.user || t.createdBy}</td>
+          </tr>`);
+      });
+
+      const sumAll = txs.reduce((acc, t) => acc + Number(t.amount), 0);
+      totalSummary.textContent = `Total Amount: ₱${sumAll.toLocaleString()}`;
+
+      drawCharts(); // Always use full dataset
+    }
+
+    unlockBtn.addEventListener('click', () => {
+      if (lockedUntil && Date.now() < lockedUntil) {
+        const sec = Math.ceil((lockedUntil - Date.now()) / 1000);
+        lockNote.textContent = `🔒 Locked. Try again in ${sec}s`;
+        return;
+      }
+      attempts++;
+      if (attempts > 5) {
+        lockedUntil = Date.now() + 60000;
+        lockNote.textContent = '🔒 Locked for 1 minute';
+        return;
+      }
+      revealedKey = `${unlockName.value.trim()}::${unlockReceipt.value.trim()}`;
+      isAdmin = false;
+      lockNote.textContent = '';
+      render();
+    });
+
+    viewAllBtn.addEventListener('click', () => {
+      const u = prompt("Admin Username:");
+      const p = prompt("Admin Password:");
+      if (u === "GGG555" && p === "xiaoxiao") {
+        isAdmin = true;
+        lockNote.textContent = "✅ Admin access granted – all records visible";
+        render();
+      } else {
+        alert("❌ Invalid admin credentials");
+      }
+    });
+
+    [searchInput, filterYear, filterMajor].forEach(el => el.addEventListener('input', render));
+    unlockReceipt.addEventListener('change', render);
+
+    render();
+
+    function drawCharts() {
+      const dataMaj = {},
+            dataYear = {};
+
+      txs.forEach(t => {
+        dataMaj[t.major]  = (dataMaj[t.major] || 0) + Number(t.amount);
+        dataYear[t.year]  = (dataYear[t.year] || 0) + 1;
+      });
+
+      if (majorChart) majorChart.destroy();
+      majorChart = new Chart(document.getElementById('majorChart'), {
+        type: 'pie',
+        data: {
+          labels: Object.keys(dataMaj),
+          datasets: [{ data: Object.values(dataMaj),
+                        backgroundColor: ['#8AF1FF','#9FFF9D','#FFE4F4','#FF9DAE'] }]
+        },
+        options: { plugins: { title: { display: true, text: 'Total Amount by Major (All)' } } }
+      });
+
+      if (yearChart) yearChart.destroy();
+      yearChart = new Chart(document.getElementById('yearChart'), {
+        type: 'bar',
+        data: {
+          labels: Object.keys(dataYear),
+          datasets: [{ data: Object.values(dataYear), label: 'Count', backgroundColor: '#5B5AA4' }]
+        },
+        options: { plugins: { title: { display: true, text: 'Transactions by Year (All)' } }, scales: { y: { beginAtZero: true } } }
+      });
+    }
+  </script>
+</body>
+</html>

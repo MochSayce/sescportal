@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transaction Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-body">
+
+  <!-- LOGIN SECTION -->
+  <div class="login-container" id="loginSection">
+    <img src="bsed.png" alt="Org Logo" class="logo" />
+    <h1>Transaction Portal</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p id="loginStatus"></p>
+    <div id="lockoutTimer" class="hidden">This will be temporarily blocked for 1 minute.</div>
+
+    <div style="margin-top: 1rem; text-align: center;">
+      <a href="view_only.html">
+        <button type="button" style="padding: 10px 20px; border-radius: 8px; background-color: #444; color: white; border: none; cursor: pointer;">
+          View Only (Open Access)
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <!-- MENU SECTION (Initially hidden) -->
+  <div id="menuSection" class="hidden">
+    <button id="logoutBtn">Logout</button>
+    <button onclick="location.href='history.html'">📜 View History Log</button>
+    <button onclick="window.location.href='data.html'" class="control-button">📊 View Data</button>
+
+    <div class="container">
+      <img src="bsed.png" alt="Org Logo" class="logo">
+      <h1>Secondary Education Students' Club</h1>
+      <h2 id="welcomeMessage">Welcome</h2>
+
+      <!-- Create Transaction -->
+      <section>
+        <h2>Create Transaction</h2>
+        <form id="transactionForm">
+          <input type="text" id="receiptNumber" placeholder="Receipt Number" readonly>
+          <label for="manualStartReceipt">Start Receipt # (only if empty):</label>
+          <input type="number" id="manualStartReceipt" placeholder="e.g. 12631">
+          <button id="setStartBtn">Set Start</button>
+
+          <input type="text" id="nameInput" placeholder="Search Name..." list="nameSuggestions" required>
+          <datalist id="nameSuggestions"></datalist>
+
+          <div class="button-group" id="yearButtons">
+            <button type="button" data-year="1st">1st</button>
+            <button type="button" data-year="2nd">2nd</button>
+            <button type="button" data-year="3rd">3rd</button>
+            <button type="button" data-year="4th">4th</button>
+            <button type="button" data-year="5th">5th</button>
+            <button type="button" data-year="Irregular">Irregular</button>
+          </div>
+
+          <div class="button-group" id="majorButtons">
+            <button type="button" data-major="Bio">Bio 🧬</button>
+            <button type="button" data-major="Math">Math ➕</button>
+            <button type="button" data-major="Filo">Filo 📚</button>
+            <button type="button" data-major="Eng">Eng 📝</button>
+          </div>
+
+          <input type="number" id="amountInput" placeholder="Enter Amount" required>
+          <div class="button-group">
+            <button type="button" id="suggestedAmount">300</button>
+          </div>
+
+          <button type="submit">Add Transaction</button>
+          <button type="button" id="importNamesBtn">Import Names</button>
+          <input type="file" id="nameFileInput" accept=".txt, .csv" hidden>
+          <textarea id="namePasteInput" placeholder="Or paste names here... (one per line)" rows="3"></textarea>
+        </form>
+      </section>
+
+      <!-- Transaction History -->
+      <section>
+        <h2>Transaction History</h2>
+        <input type="text" id="searchHistory" placeholder="Search transactions...">
+        <select id="filterMajor">
+          <option value="">Filter by Major</option>
+          <option value="Bio">Bio</option>
+          <option value="Math">Math</option>
+          <option value="Filo">Filo</option>
+          <option value="Eng">Eng</option>
+        </select>
+        <button id="exportBtn">Export</button>
+        <input type="file" id="importFileInput" accept=".json">
+        <button onclick="document.getElementById('importFileInput').click()">Import</button>
+        <p>Total Amount: ₱<span id="totalAmount">0</span></p>
+        <table>
+          <thead>
+            <tr>
+              <th onclick="sortBy('receipt')">Receipt #</th>
+              <th>Name</th>
+              <th>Year</th>
+              <th>Major</th>
+              <th>Amount</th>
+              <th>Time</th>
+              <th>Edited</th>
+              <th>Made By</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="transactionTableBody"></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>

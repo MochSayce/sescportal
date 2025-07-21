@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>History Log</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Edit/Delete History</h1>
+
+    <button onclick="exportHistory()">📁 Export to JSON</button>
+    <button onclick="location.href='index.html'">🔙 Back to Menu</button>
+
+    <div class="auth-section">
+      <input type="text" id="adminUser" placeholder="Username" />
+      <input type="password" id="adminPass" placeholder="Password" />
+    </div>
+
+    <button onclick="clearHistory()">🗑️ Clear History</button>
+
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Receipt #</th>
+          <th>Changed Field</th>
+          <th>Old Value</th>
+          <th>New Value</th>
+          <th>User</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Logs will appear here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="history.js"></script>
+</body>
+</html>

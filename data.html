@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Analytics – Transaction Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <img src="bsed.png" alt="BSED Logo" class="logo" />
+    <h1>📊 Transaction Data Analytics</h1>
+    <button onclick="window.location.href='menu.html'" class="back-button">🔙 Back to Menu</button>
+  </header>
+
+  <section class="filters">
+    <div class="filter-group">
+      <label for="filter-major">Major:</label>
+      <select id="filter-major">
+        <option value="all">All</option>
+        <option value="Math">Math</option>
+        <option value="Bio">Bio</option>
+        <option value="Filo">Filo</option>
+        <option value="Eng">Eng</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="filter-year">Year:</label>
+      <select id="filter-year">
+        <option value="all">All</option>
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+        <option value="5th">5th</option>
+        <option value="Irregular">Irregular</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="chart-type">Chart Type:</label>
+      <select id="chart-type">
+        <option value="bar">Bar Chart</option>
+        <option value="pie">Pie Chart</option>
+        <option value="line">Line Chart</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="chart-container">
+    <canvas id="transactionChart"></canvas>
+  </section>
+
+  <section class="totals">
+    <h3>📌 Subtotal (Filtered): <span id="subtotal">₱0.00</span></h3>
+    <h3>🧾 Transaction Count: <span id="txCount">0</span></h3>
+  </section>
+
+  <script src="data.js"></script>
+</body>
+</html>
