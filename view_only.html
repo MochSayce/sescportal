@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transaction Records – View Only</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <style>
     /* Container & Layout */
     body {
@@ -126,15 +124,15 @@
   <div class="container">
     <h1>Transaction Records – View Only</h1>
     <p class="info-note">
-      Receipt, Name & Amount are hidden unless unlocked with correct details.<br>
+      Receipt, Name &amp; Amount are hidden unless unlocked with correct details.<br>
       Up to 5 attempts allowed—then locked for 1 minute.<br>
       Admin can view all with correct credentials.
     </p>
 
     <div class="controls">
       <input type="text" id="search" placeholder="Search by name/major…">
-      <select id="filterYear"><option value="">All Years</option></select>
-      <select id="filterMajor"><option value="">All Majors</option></select>
+      <select id="filterYear"><option value="">All Years</option><option value="2nd">2nd</option><option value="5th">5th</option><option value="1st">1st</option><option value="4th">4th</option><option value="3rd">3rd</option></select>
+      <select id="filterMajor"><option value="">All Majors</option><option value="Bio">Bio</option><option value="Math">Math</option><option value="Filo">Filo</option><option value="Eng">Eng</option></select>
       <input type="text" id="unlockName" placeholder="Enter exact name">
       <input type="number" id="unlockReceipt" placeholder="Receipt #">
       <button id="unlockBtn">Unlock</button>
@@ -156,20 +154,307 @@
           <th>Encoded By</th>
         </tr>
       </thead>
-      <tbody id="tbody"></tbody>
+      <tbody id="tbody">
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Bio</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>Elza</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>1st</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>Unknown</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>1st</td>
+            <td>Bio</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>5th</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>Unknown</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>5th</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce - Payment for Fines</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce - Payment for Fines</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>3rd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>3rd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>3rd</td>
+            <td>Bio</td>
+            <td class="censored">Hidden</td>
+            <td>Payment for Fines</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>5th</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Elza</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>3rd</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>3rd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce - Payment for Fines</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Filo</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce - Payment for Fines</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Bio</td>
+            <td class="censored">Hidden</td>
+            <td>Unknown</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>Cyrelle Ignacio</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>3rd</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>alcomoji</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>4th</td>
+            <td>Eng</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce - Payment for Fines</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>3rd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr>
+          <tr>
+            <td class="censored">••••••</td>
+            <td class="censored">••••••</td>
+            <td>2nd</td>
+            <td>Math</td>
+            <td class="censored">Hidden</td>
+            <td>Moch Sayce</td>
+          </tr></tbody>
     </table>
 
-    <div class="total-summary" id="totalSummary">
-      Total Amount: ₱0.00
-    </div>
+    <div class="total-summary" id="totalSummary">Total Amount: ₱11,931</div>
 
-    <canvas id="majorChart" height="200"></canvas>
-    <canvas id="yearChart" height="200"></canvas>
+    <canvas id="majorChart" height="450" width="450" style="display: block; box-sizing: border-box; height: 300px; width: 300px;"></canvas>
+    <canvas id="yearChart" height="300" width="450" style="display: block; box-sizing: border-box; height: 200px; width: 300px;"></canvas>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    const txs = JSON.parse(localStorage.getItem('transactions') || '[]');
+    const txs = [{"receipt":12631,"name":"Maria Mercedes","year":"2nd","major":"Bio","amount":"300","timestamp":"2025-07-19T13:46:54.394Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12632,"name":"Mercury Druggies","year":"5th","major":"Math","amount":"600","timestamp":"2025-07-19T02:11:48.383Z","createdBy":"Elza","editCount":0,"editHistory":[]},{"receipt":12633,"name":"Xiao Xiao Baby","year":"1st","major":"Bio","amount":"300","timestamp":"2025-07-19T02:18:12.453Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12634,"name":"Tanggol Cardo Dalisay","year":"4th","major":"Filo","amount":"1000","timestamp":"2025-07-19T02:18:55.351Z","createdBy":"Elza","editCount":0,"editHistory":[]},{"receipt":12635,"name":"Maria Mercedes","year":"2nd","major":"Filo","amount":"300","timestamp":"2025-07-19T14:00:34.791Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12636,"name":"O","year":"2nd","major":"Eng","amount":"300","timestamp":"2025-07-19T14:27:23.911Z","createdBy":"Cyrelle Ignacio","editCount":0,"editHistory":[]},{"receipt":12637,"name":"Mark Ibarita","year":"4th","major":"Filo","amount":"300","timestamp":"2025-07-19T13:50:18.480Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12638,"name":"John Bern Q. Rivera","year":"3rd","major":"Math","amount":"300","timestamp":"2025-07-19T13:50:49.160Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12639,"name":"Sheddy Sulaiman","year":"4th","major":"Filo","amount":"300","timestamp":"2025-07-19T14:05:59.487Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12640,"name":"Alaysa Solayman","year":"4th","major":"Filo","amount":"300","timestamp":"2025-07-19T14:06:14.388Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12641,"name":"2023-2704","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-19T14:08:04.476Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12642,"name":"Aguilar, Ched","year":"3rd","major":"Eng","amount":"300","timestamp":"2025-07-21T06:15:51.275Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12643,"name":"Alforque, Angel","year":"3rd","major":"Eng","amount":"300","timestamp":"2025-07-21T06:16:15.586Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12644,"name":"Juan Dela Cruz","year":"3rd","major":"Bio","amount":"100","timestamp":"2025-07-21T06:21:02.162Z","createdBy":"Payment for Fines","editCount":0,"editHistory":[]},{"receipt":12645,"name":"Jaye Manan","year":"4th","major":"Eng","amount":"300","timestamp":"2025-07-21T06:31:57.038Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12646,"name":"Jaye Manan","year":"4th","major":"Eng","amount":"100","timestamp":"2025-07-21T06:32:49.073Z","createdBy":"Moch Sayce - Payment for Fines","editCount":0,"editHistory":[]},{"receipt":12647,"name":"Jaye","year":"4th","major":"Eng","amount":"200","timestamp":"2025-07-21T07:58:02.498Z","createdBy":"Moch Sayce - Payment for Fines","editCount":0,"editHistory":[]},{"receipt":12648,"name":"Jaye Manan","year":"4th","major":"Eng","amount":"400","timestamp":"2025-07-21T08:07:36.755Z","createdBy":"alcomoji","editCount":0,"editHistory":[]},{"receipt":12649,"name":"Hello","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:15:58.046Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12650,"name":"Hello","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:15:59.618Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12651,"name":"Hello","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:15:59.790Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12652,"name":"Hello","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:15:59.957Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12653,"name":"Hello","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:16:00.129Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12654,"name":"Hello","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:16:00.305Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12655,"name":"Hello","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:16:00.488Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12656,"name":"Mara","year":"2nd","major":"Math","amount":"300","timestamp":"2025-07-21T11:23:33.611Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12657,"name":"Juan Dela Cruz","year":"3rd","major":"Math","amount":"300","timestamp":"2025-07-21T11:25:33.922Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12658,"name":"Hello","year":"3rd","major":"Math","amount":"200","timestamp":"2025-07-21T11:33:35.139Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12659,"name":"Hello","year":"3rd","major":"Math","amount":"900","timestamp":"2025-07-21T11:33:47.340Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12660,"name":"Marco","year":"2nd","major":"Math","amount":"177","timestamp":"2025-07-21T11:34:17.649Z","createdBy":"Moch Sayce","editCount":0,"editHistory":[]},{"receipt":12661,"name":"Hellow","year":"2nd","major":"Bio","amount":"300","timestamp":"2025-07-21T11:35:18.066Z","createdBy":"Unknown","editCount":0,"editHistory":[]},{"receipt":12662,"name":"Hippolito","year":"5th","major":"Filo","amount":"300","timestamp":"2025-07-21T11:35:39.006Z","createdBy":"Unknown","editCount":0,"editHistory":[]},{"receipt":12663,"name":"Ge","year":"1st","major":"Filo","amount":"300","timestamp":"2025-07-21T11:36:10.443Z","createdBy":"Unknown","editCount":0,"editHistory":[]},{"receipt":12664,"name":"John Doe","year":"2nd","major":"Filo","amount":"454","timestamp":"2025-07-21T13:29:33.438Z","createdBy":"Moch Sayce - Payment for Fines","editCount":0,"editHistory":[]}]
+    
 
     const tbody         = document.getElementById('tbody');
     const searchInput   = document.getElementById('search');
@@ -222,9 +507,10 @@
                           && Number(unlockReceipt.value) === t.receipt);
 
         const rTxt = unlocked ? t.receipt : '••••••';
-        const nTxt = unlocked ? t.name : '••••••';
-        const aTxt = unlocked ? `₱${t.amount}` : 'Hidden';
-        const cls = unlocked ? '' : 'censored';
+const nTxt = t.name;  // 👈 always show the real name
+const aTxt = unlocked ? `₱${t.amount}` : 'Hidden';
+const cls = unlocked ? '' : 'censored';
+
 
         tbody.insertAdjacentHTML('beforeend', `
           <tr>
@@ -309,5 +595,6 @@
       });
     }
   </script>
-</body>
-</html>
+
+
+</body></html>
