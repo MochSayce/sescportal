@@ -4,7 +4,7 @@ const users = {
   "Jaye Manan": "77567885",
   "Trisha Krisbiene Batiancila": "file:///C:/Users/al%20coreinee%20sayce/Downloads/LUMAY/y/bsed.png",
   "Cyrelle Ignacio": "file:///C:/Users/al%20coreinee%20sayce/Downloads/LUMAY/y/bsed.png",
-  "GGG555": "xiaoxiao"
+  "sesc20252026": "12345"
 };
 
 let attempts = 0;
