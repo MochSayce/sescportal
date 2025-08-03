@@ -122,7 +122,7 @@ document.getElementById("receiptNumber").value = getNextReceiptNumber();
 
 
 document.getElementById("suggestedAmount").onclick = () => {
-  document.getElementById("amountInput").value = 300;
+  document.getElementById("amountInput").value = 400;
 };
 
 document.getElementById("transactionForm").onsubmit = e => {
@@ -288,3 +288,4 @@ if (transaction.user === currentUser) {
 } else {
   actionCell.innerHTML = `<span style="color:gray;">No Access</span>`;
 }
+
