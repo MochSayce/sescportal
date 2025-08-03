@@ -3,8 +3,7 @@ const users = {
   "Moch Sayce": "Mochsayce1",
   "Jaye Manan": "77567885",
   "Trisha Krisbiene Batiancila": "file:///C:/Users/al%20coreinee%20sayce/Downloads/LUMAY/y/bsed.png",
-  "Cyrelle Ignacio": "file:///C:/Users/al%20coreinee%20sayce/Downloads/LUMAY/y/bsed.png",
-  "sesc20252026": "12345"
+  "Cyrelle Ignacio": "file:///C:/Users/al%20coreinee%20sayce/Downloads/LUMAY/y/bsed.png"
 };
 
 let attempts = 0;
